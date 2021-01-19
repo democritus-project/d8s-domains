@@ -1,0 +1,7 @@
+democritus-hypothesis @ git+https://github.com/democritus-project/democritus-hypothesis.git#egg=democritus-hypothesis
+democritus-networking @ git+https://github.com/democritus-project/democritus-networking.git#egg=democritus-networking
+democritus-urls @ git+https://github.com/democritus-project/democritus-urls.git#egg=democritus-urls
+hypothesis
+ioc-finder
+tldextract
+whois

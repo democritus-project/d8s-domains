@@ -1,12 +1,6 @@
-# -*- coding: utf-8 -*-
+from typing import Optional, List, Dict, Any
 
-import os
-import sys
-from typing import Optional
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '.')))
-import decorators
-from typings import ListOfStrs, DictStrKeyAnyVal
+from .domains_temp_utils import get_first_arg_url_domain
 
 
 def is_domain(possible_domain: str) -> bool:
@@ -19,25 +13,25 @@ def is_domain(possible_domain: str) -> bool:
 
 
 # TODO: this function will sometimes create/return duplicates... probably need to have some option to prevent duplicates
-def domain_examples(n: int = 10) -> ListOfStrs:
+def domain_examples(n: int = 10) -> List[str]:
     """Create n domain names."""
     from hypothesis.provisional import domains
 
-    from hypothesis_data import hypothesis_get_strategy_results
+    from democritus_hypothesis import hypothesis_get_strategy_results
 
     results = hypothesis_get_strategy_results(domains, n=n)
 
     return results
 
 
-def domains_find(text: str, **kwargs: bool) -> ListOfStrs:
+def domains_find(text: str, **kwargs: bool) -> List[str]:
     """Parse domain names from the given text."""
     from ioc_finder import ioc_finder
 
     return ioc_finder.parse_domain_names(text, **kwargs)
 
 
-@decorators.get_first_arg_url_domain
+@get_first_arg_url_domain
 def domain_dns(domain: str) -> str:
     """Get the DNS results for the given domain."""
     import socket
@@ -45,8 +39,8 @@ def domain_dns(domain: str) -> str:
     return socket.gethostbyname(domain)
 
 
-@decorators.get_first_arg_url_domain
-def domain_certificate_peers(domain: str) -> ListOfStrs:
+@get_first_arg_url_domain
+def domain_certificate_peers(domain: str) -> List[str]:
     """Return a list of all domains sharing a certificate with the given domain."""
     import socket
     import ssl
@@ -58,8 +52,8 @@ def domain_certificate_peers(domain: str) -> ListOfStrs:
     return [domain_name[1] for domain_name in cert['subjectAltName']]
 
 
-@decorators.get_first_arg_url_domain
-def domain_whois(domain: str) -> Optional[DictStrKeyAnyVal]:
+@get_first_arg_url_domain
+def domain_whois(domain: str) -> Optional[Dict[str, Any]]:
     """."""
     import whois
 
@@ -70,7 +64,7 @@ def domain_whois(domain: str) -> Optional[DictStrKeyAnyVal]:
         return None
 
 
-@decorators.get_first_arg_url_domain
+@get_first_arg_url_domain
 def domain_subdomains(domain_name: str) -> str:
     """Get the subdomains for the given domain name."""
     import tldextract
@@ -78,7 +72,7 @@ def domain_subdomains(domain_name: str) -> str:
     return tldextract.extract(domain_name).subdomain
 
 
-@decorators.get_first_arg_url_domain
+@get_first_arg_url_domain
 def domain_second_level_name(domain_name: str) -> str:
     """Get the second level name for the given domain name (e.g. google from https://google.co.uk)."""
     import tldextract
@@ -86,7 +80,7 @@ def domain_second_level_name(domain_name: str) -> str:
     return tldextract.extract(domain_name).domain
 
 
-@decorators.get_first_arg_url_domain
+@get_first_arg_url_domain
 def domain_tld(domain_name: str) -> str:
     """Get the top level domain for the given domain name."""
     import tldextract
@@ -94,45 +88,43 @@ def domain_tld(domain_name: str) -> str:
     return tldextract.extract(domain_name).suffix
 
 
-@decorators.get_first_arg_url_domain
+@get_first_arg_url_domain
 def domain_rank(domain_name: str) -> int:
     """."""
-    from networking import get
+    from democritus_networking import get
 
     onemillion_api_url = f'http://onemillion.hightower.space/onemillion/{domain_name}'
-    return get(onemillion_api_url)
+    return get(onemillion_api_url, process_response=True)
 
 
-@decorators.get_first_arg_url_domain
+@get_first_arg_url_domain
 def domain_as_punycode(domain_name: str) -> str:
     """Convert the given domain name to Punycode (https://en.wikipedia.org/wiki/Punycode)."""
     return domain_name.encode('idna').decode('utf-8')
 
 
-@decorators.get_first_arg_url_domain
+@get_first_arg_url_domain
 def domain_as_unicode(domain_name: str) -> str:
     """Convert a given domain name to Unicode (https://en.wikipedia.org/wiki/Unicode)."""
     return domain_name.encode('utf-8').decode('idna')
 
 
 # TODO: cache this data
-def tlds() -> ListOfStrs:
+def tlds() -> List[str]:
     """Get the top level domains from https://iana.org/."""
-    from networking import get
-    from strings import lowercase
+    from democritus_networking import get
 
-    top_level_domains = get('https://data.iana.org/TLD/tlds-alpha-by-domain.txt').split('\n')[1:-1]
-    return lowercase(top_level_domains)
+    top_level_domains = get('https://data.iana.org/TLD/tlds-alpha-by-domain.txt', process_response=True).split('\n')[
+        1:-1
+    ]
+    return [tld.lower() for tld in top_level_domains]
 
 
-@decorators.map_first_arg
 def is_tld(possible_tld: str) -> bool:
     """Return whether or not the possible_tld is a valid tld."""
-    from strings import lowercase
-
     # remove any periods from the beginning (in case someone provides the TLD like `.com` rather than just `com`)
     possible_tld = possible_tld.lstrip('.')
 
-    valid_tlds = tlds()
-    tld_is_valid = lowercase(possible_tld) in lowercase(valid_tlds)
+    valid_tlds = [tld.lower() for tld in tlds()]
+    tld_is_valid = possible_tld.lower() in valid_tlds
     return tld_is_valid

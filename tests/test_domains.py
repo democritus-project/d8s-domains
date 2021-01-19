@@ -32,12 +32,14 @@ def test_domain_examples_docs_1():
 
 
 def test_domains_find_docs_1():
-    from lists import lists_have_same_items
-
     s = '''foo.com
     bingo.co.uk
     BAR.COM'''
-    assert lists_have_same_items(domains_find(s), ['foo.com', 'bingo.co.uk', 'bar.com'])
+    domain_list = domains_find(s)
+    assert len(domain_list) == 3
+    assert 'foo.com' in domain_list
+    assert 'bingo.co.uk' in domain_list
+    assert 'bar.com' in domain_list
 
 
 @pytest.mark.network
@@ -124,4 +126,9 @@ def test_is_domain_docs_1():
 
 
 def test_is_tld_docs_1():
-    assert is_tld(['com', 'org', 'foobar', 'ocx', 'dotm', '.com']) == [True, True, False, False, False, True]
+    assert is_tld('com')
+    assert is_tld('org')
+    assert not is_tld('foobar')
+    assert not is_tld('ocx')
+    assert not is_tld('dotm')
+    assert is_tld('.com')
