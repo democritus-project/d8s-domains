@@ -5,3 +5,4 @@ hypothesis
 ioc-finder
 tldextract
 whois
+importlib-metadata; python_version < '3.8'
