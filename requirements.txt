@@ -1,8 +1,8 @@
-democritus-hypothesis @ git+https://github.com/democritus-project/democritus-hypothesis.git#egg=democritus-hypothesis
-democritus-networking @ git+https://github.com/democritus-project/democritus-networking.git#egg=democritus-networking
-democritus-urls @ git+https://github.com/democritus-project/democritus-urls.git#egg=democritus-urls
+democritus-hypothesis
+democritus-networking
+democritus-urls
 hypothesis
+importlib-metadata; python_version < '3.8'
 ioc-finder
 tldextract
 whois
-importlib-metadata; python_version < '3.8'
