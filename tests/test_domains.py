@@ -3,20 +3,20 @@ import datetime
 import pytest
 
 from democritus_domains import (
-    is_domain,
-    domain_examples,
-    domains_find,
-    domain_dns,
-    domain_certificate_peers,
-    domain_whois,
-    domain_subdomains,
-    domain_second_level_name,
-    domain_tld,
-    domain_rank,
     domain_as_punycode,
     domain_as_unicode,
-    tlds,
+    domain_certificate_peers,
+    domain_dns,
+    domain_examples,
+    domain_rank,
+    domain_second_level_name,
+    domain_subdomains,
+    domain_tld,
+    domain_whois,
+    domains_find,
+    is_domain,
     is_tld,
+    tlds,
 )
 
 
@@ -115,14 +115,14 @@ def test_domain_whois_docs_1():
             'ns1.google.com',
         },
     }
-    assert domain_whois('example.com') == None
+    assert domain_whois('example.com') is None
 
 
 def test_is_domain_docs_1():
-    assert is_domain('example.com') == True
-    assert is_domain('forums.bbc.co.uk') == True
-    assert is_domain('foo.bar') == True
-    assert is_domain('foo') == False
+    assert is_domain('example.com')
+    assert is_domain('forums.bbc.co.uk')
+    assert is_domain('foo.bar')
+    assert not is_domain('foo')
 
 
 def test_is_tld_docs_1():

@@ -1,4 +1,12 @@
-from typing import Optional, List, Dict, Any
+import socket
+import ssl
+from typing import Any, Dict, List, Optional
+
+import tldextract
+from democritus_hypothesis import hypothesis_get_strategy_results
+from democritus_networking import get
+from hypothesis.provisional import domains
+from ioc_finder import ioc_finder
 
 from .domains_temp_utils import get_first_arg_url_domain
 
@@ -15,10 +23,6 @@ def is_domain(possible_domain: str) -> bool:
 # TODO: this function will sometimes create/return duplicates... probably need to have some option to prevent duplicates
 def domain_examples(n: int = 10) -> List[str]:
     """Create n domain names."""
-    from hypothesis.provisional import domains
-
-    from democritus_hypothesis import hypothesis_get_strategy_results
-
     results = hypothesis_get_strategy_results(domains, n=n)
 
     return results
@@ -26,30 +30,23 @@ def domain_examples(n: int = 10) -> List[str]:
 
 def domains_find(text: str, **kwargs: bool) -> List[str]:
     """Parse domain names from the given text."""
-    from ioc_finder import ioc_finder
-
     return ioc_finder.parse_domain_names(text, **kwargs)
 
 
 @get_first_arg_url_domain
 def domain_dns(domain: str) -> str:
     """Get the DNS results for the given domain."""
-    import socket
-
     return socket.gethostbyname(domain)
 
 
 @get_first_arg_url_domain
 def domain_certificate_peers(domain: str) -> List[str]:
     """Return a list of all domains sharing a certificate with the given domain."""
-    import socket
-    import ssl
-
     ctx = ssl.create_default_context()
     s = ctx.wrap_socket(socket.socket(), server_hostname=domain)
     s.connect((domain, 443))
     cert = s.getpeercert()
-    return [domain_name[1] for domain_name in cert['subjectAltName']]
+    return [domain_name[1] for domain_name in cert['subjectAltName']]  # type: ignore
 
 
 @get_first_arg_url_domain
@@ -67,32 +64,24 @@ def domain_whois(domain: str) -> Optional[Dict[str, Any]]:
 @get_first_arg_url_domain
 def domain_subdomains(domain_name: str) -> str:
     """Get the subdomains for the given domain name."""
-    import tldextract
-
     return tldextract.extract(domain_name).subdomain
 
 
 @get_first_arg_url_domain
 def domain_second_level_name(domain_name: str) -> str:
     """Get the second level name for the given domain name (e.g. google from https://google.co.uk)."""
-    import tldextract
-
     return tldextract.extract(domain_name).domain
 
 
 @get_first_arg_url_domain
 def domain_tld(domain_name: str) -> str:
     """Get the top level domain for the given domain name."""
-    import tldextract
-
     return tldextract.extract(domain_name).suffix
 
 
 @get_first_arg_url_domain
 def domain_rank(domain_name: str) -> int:
     """."""
-    from democritus_networking import get
-
     onemillion_api_url = f'http://onemillion.hightower.space/onemillion/{domain_name}'
     return get(onemillion_api_url, process_response=True)
 
@@ -112,8 +101,6 @@ def domain_as_unicode(domain_name: str) -> str:
 # TODO: cache this data
 def tlds() -> List[str]:
     """Get the top level domains from https://iana.org/."""
-    from democritus_networking import get
-
     top_level_domains = get('https://data.iana.org/TLD/tlds-alpha-by-domain.txt', process_response=True).split('\n')[
         1:-1
     ]
