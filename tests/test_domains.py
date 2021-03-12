@@ -8,6 +8,7 @@ from democritus_domains import (
     domain_certificate_peers,
     domain_dns,
     domain_examples,
+    domain_member_of_domains,
     domain_rank,
     domain_second_level_name,
     domain_subdomains,
