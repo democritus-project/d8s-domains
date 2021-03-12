@@ -77,12 +77,12 @@ def test_domain_dns_docs_1():
     assert domain_dns('example.com') == '93.184.216.34'
 
 def test_domain_member_of_domains():
-    assert domain_member_of_domains('example.com', ['example.com']) == True
-    assert domain_member_of_domains('example.com', ['google.com', 'example.com']) == True
-    assert domain_member_of_domains('example.com', ['test.example.com']) == True
-    assert domain_member_of_domains('example.com', ['testexample.com']) == False
-    assert domain_member_of_domains('example.com', ['test.testexample.com']) == False
-    assert domain_member_of_domains('example.com', ['example.com.br']) == False
+    assert domain_member_of_domains('example.com', ['example.com']) is True
+    assert domain_member_of_domains('example.com', ['google.com', 'example.com']) is True
+    assert domain_member_of_domains('example.com', ['test.example.com']) is True
+    assert domain_member_of_domains('example.com', ['testexample.com']) is False
+    assert domain_member_of_domains('example.com', ['test.testexample.com']) is False
+    assert domain_member_of_domains('example.com', ['example.com.br']) is False
 
 def test_domain_second_level_name_docs_1():
     assert domain_second_level_name('http://example.com/test/bingo') == 'example'
