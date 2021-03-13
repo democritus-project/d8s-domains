@@ -99,7 +99,7 @@ def domain_is_member(domain_to_check: str, domain_base: str) -> bool:
     subdomains = domain_subdomains(domain_to_check)
 
     if domain_tld(domain_base) == tld and domain_second_level_name(domain_base) == name:
-        if subdomains.count('.') >= domain_subdomains(domain_base).count('.'):
+        if subdomains and subdomains.count('.') >= domain_subdomains(domain_base).count('.'):
             return True
     return False
 
