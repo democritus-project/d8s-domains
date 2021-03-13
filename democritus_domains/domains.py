@@ -87,19 +87,20 @@ def domain_rank(domain_name: str) -> int:
 
 
 @get_first_arg_url_domain
-def domain_member_of_domains(domain_name: str, domains_set: set) -> bool:
-    """Given a list (set) of domains, check if the given domain is a member of the domains.
+def domain_is_member(domain_to_check: str, domain_base: str) -> bool:
+    """Given two domains, check if the first domain is a member of the second domain.
     A member means it is either the domain itself, or a subdomain of the domain.
     """
-    name = domain_second_level_name(domain_name)
-    tld = domain_tld(domain_name)
+    if domain_to_check == domain_base:
+        return True
 
-    for domain in domains_set:
-        if domain == domain_name:
+    name = domain_second_level_name(domain_to_check)
+    tld = domain_tld(domain_to_check)
+    subdomains = domain_subdomains(domain_to_check)
+
+    if domain_tld(domain_base) == tld and domain_second_level_name(domain_base) == name:
+        if subdomains.count('.') >= domain_subdomains(domain_base).count('.'):
             return True
-        else:
-            if domain_tld(domain) == tld and domain_second_level_name(domain) == name:
-                return True
     return False
 
 
