@@ -2,7 +2,7 @@ import datetime
 
 import pytest
 
-from democritus_domains import (
+from d8s_domains import (
     domain_as_punycode,
     domain_as_unicode,
     domain_certificate_peers,
