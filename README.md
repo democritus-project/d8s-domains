@@ -1,8 +1,8 @@
 # Democritus Domains
 
-[![PyPI](https://img.shields.io/pypi/v/democritus-domains.svg)](https://pypi.python.org/pypi/democritus-domains)
-[![Build Status](https://travis-ci.com/democritus-project/democritus-domains.svg?branch=main)](https://travis-ci.com/democritus-project/democritus-domains)
-[![codecov](https://codecov.io/gh/democritus-project/democritus-domains/branch/main/graph/badge.svg?token=V0WOIXRGMM)](https://codecov.io/gh/democritus-project/democritus-domains)
+[![PyPI](https://img.shields.io/pypi/v/d8s-domains.svg)](https://pypi.python.org/pypi/d8s-domains)
+[![Build Status](https://travis-ci.com/democritus-project/d8s-domains.svg?branch=main)](https://travis-ci.com/democritus-project/d8s-domains)
+[![codecov](https://codecov.io/gh/democritus-project/d8s-domains/branch/main/graph/badge.svg?token=V0WOIXRGMM)](https://codecov.io/gh/democritus-project/d8s-domains)
 
 Democritus functions<sup>[1]</sup> for working with domains.
 
