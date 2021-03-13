@@ -96,10 +96,21 @@ def domain_is_member(domain_to_check: str, domain_base: str) -> bool:
 
     name = domain_second_level_name(domain_to_check)
     tld = domain_tld(domain_to_check)
-    subdomains = domain_subdomains(domain_to_check)
+
+    subdomain_str = domain_subdomains(domain_to_check)
+    subdomains = subdomain_str.split('.')
+    last_subdomain = subdomains[len(subdomains) - 1]
+
+    base_subdomain_str = domain_subdomains(domain_base)
+    base_subdomains = base_subdomain_str.split('.')
+    base_last_subdomain = base_subdomains[len(base_subdomains) - 1]
+
+    # handle case where base is the second level , domain has a subdomain
+    if not base_last_subdomain:
+        return "." + domain_base in domain_to_check
 
     if domain_tld(domain_base) == tld and domain_second_level_name(domain_base) == name:
-        if subdomains and subdomains.count('.') >= domain_subdomains(domain_base).count('.'):
+        if last_subdomain == base_last_subdomain:
             return True
     return False
 

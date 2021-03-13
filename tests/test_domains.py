@@ -81,6 +81,8 @@ def test_domain_is_member():
     assert domain_is_member('example.com', 'google.com') is False
     assert domain_is_member('test.example.com', 'example.com') is True
     assert domain_is_member('example.com', 'test.example.com') is False
+    assert domain_is_member('t.example.com', 'test.example.com') is False
+    assert domain_is_member('test1.example.com', 'test.example.com') is False
     assert domain_is_member('test.example.com', 'test.example.com') is True
     assert domain_is_member('subdomain.test.example.com', 'test.example.com') is True
     assert domain_is_member('example.com', 'testexample.com') is False
