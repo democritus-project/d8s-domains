@@ -6,10 +6,10 @@ except ImportError:
 from .domains import *
 
 try:
-    __version__ = version('democritus_domains')
+    __version__ = version('d8s_domains')
 except PackageNotFoundError:
     message = (
-        'Unable to find a version number for "democritus_domains". '
+        'Unable to find a version number for "d8s_domains". '
         + 'This likely means the library was not installed '
         + 'properly. Please re-install it and, if the problem persists, '
         + 'raise an issue here: https://github.com/democritus-project/democritus-domains/issues.'

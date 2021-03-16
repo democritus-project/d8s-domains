@@ -3,8 +3,8 @@ import ssl
 from typing import Any, Dict, List, Optional
 
 import tldextract
-from democritus_hypothesis import hypothesis_get_strategy_results
-from democritus_networking import get
+from d8s_hypothesis import hypothesis_get_strategy_results
+from d8s_networking import get
 from hypothesis.provisional import domains
 from ioc_finder import ioc_finder
 

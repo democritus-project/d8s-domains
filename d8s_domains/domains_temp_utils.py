@@ -6,7 +6,7 @@ def get_first_arg_url_domain(func):
 
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        from democritus_urls import is_url, url_domain
+        from d8s_urls import is_url, url_domain
 
         domain_arg = args[0]
         other_args = args[1:]
