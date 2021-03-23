@@ -87,6 +87,33 @@ def domain_rank(domain_name: str) -> int:
 
 
 @get_first_arg_url_domain
+def domain_is_member(domain_to_check: str, domain_base: str) -> bool:
+    """Given two domains, check if the first domain is a member of the second domain.
+    A member means it is either the domain itself, or a subdomain of the domain.
+    """
+    if domain_to_check == domain_base:
+        return True
+
+    name = domain_second_level_name(domain_to_check)
+    tld = domain_tld(domain_to_check)
+
+    if domain_tld(domain_base) == tld and domain_second_level_name(domain_base) == name:
+        subdomain_str = domain_subdomains(domain_to_check)
+        subdomains = subdomain_str.split('.')
+        last_subdomain = subdomains[-1]
+
+        base_subdomain_str = domain_subdomains(domain_base)
+        base_subdomains = base_subdomain_str.split('.')
+        base_last_subdomain = base_subdomains[-1]
+
+        if not base_last_subdomain:
+            return domain_to_check.endswith("." + domain_base)
+        elif last_subdomain == base_last_subdomain:
+            return True
+    return False
+
+
+@get_first_arg_url_domain
 def domain_as_punycode(domain_name: str) -> str:
     """Convert the given domain name to Punycode (https://en.wikipedia.org/wiki/Punycode)."""
     return domain_name.encode('idna').decode('utf-8')

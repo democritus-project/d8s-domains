@@ -8,6 +8,7 @@ from d8s_domains import (
     domain_certificate_peers,
     domain_dns,
     domain_examples,
+    domain_is_member,
     domain_rank,
     domain_second_level_name,
     domain_subdomains,
@@ -75,6 +76,25 @@ def test_domain_as_unicode_docs_1():
 def test_domain_dns_docs_1():
     assert domain_dns('example.com') == '93.184.216.34'
 
+def test_domain_is_member():
+    assert domain_is_member('example.com', 'example.com') is True
+    assert domain_is_member('example.com', 'google.com') is False
+    assert domain_is_member('test.example.com', 'example.com') is True
+    assert domain_is_member('example.com', 'test.example.com') is False
+    assert domain_is_member('t.example.com', 'test.example.com') is False
+    assert domain_is_member('test1.example.com', 'test.example.com') is False
+    assert domain_is_member('example.com.notdomain.com', 'example.com') is False
+    assert domain_is_member('test.example.com.notdomain.com', 'example.com') is False
+    assert domain_is_member('1.test.example.com.notdomain.com', 'test.example.com') is False
+    assert domain_is_member('test.example.com', 'test.example.com') is True
+    assert domain_is_member('subdomain.test.example.com', 'test.example.com') is True
+    assert domain_is_member('testexample.com', 'example.com') is False
+    assert domain_is_member('test.testexample.com', 'example.com') is False
+    assert domain_is_member('test.testexample.com', 'test.example.com') is False
+    assert domain_is_member('example.com', 'testexample.com') is False
+    assert domain_is_member('example.com', 'test.testexample.com') is False
+    assert domain_is_member('test.example.com', 'test.testexample.com') is False
+    assert domain_is_member('example.com', 'example.com.br') is False
 
 def test_domain_second_level_name_docs_1():
     assert domain_second_level_name('http://example.com/test/bingo') == 'example'
