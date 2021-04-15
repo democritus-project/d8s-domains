@@ -14,9 +14,69 @@ Democritus functions<sup>[1]</sup> for working with domains.
 
 We use `d8s` as an abbreviation for `democritus` (you can read more about this [here](https://github.com/democritus-project/roadmap#what-is-d8s)).
 
-## Usage
+## Functions
 
-Coming soon...
+  - ```python
+    def is_domain(possible_domain: str) -> bool:
+        """Check if the given string is a domain."""
+    ```
+  - ```python
+    def domain_examples(n: int = 10) -> List[str]:
+        """Create n domain names."""
+    ```
+  - ```python
+    def domains_find(text: str, **kwargs: bool) -> List[str]:
+        """Parse domain names from the given text."""
+    ```
+  - ```python
+    def domain_dns(domain: str) -> str:
+        """Get the DNS results for the given domain."""
+    ```
+  - ```python
+    def domain_certificate_peers(domain: str) -> List[str]:
+        """Return a list of all domains sharing a certificate with the given domain."""
+    ```
+  - ```python
+    def domain_whois(domain: str) -> Optional[Dict[str, Any]]:
+        """."""
+    ```
+  - ```python
+    def domain_subdomains(domain_name: str) -> str:
+        """Get the subdomains for the given domain name."""
+    ```
+  - ```python
+    def domain_second_level_name(domain_name: str) -> str:
+        """Get the second level name for the given domain name (e.g. google from https://google.co.uk)."""
+    ```
+  - ```python
+    def domain_tld(domain_name: str) -> str:
+        """Get the top level domain for the given domain name."""
+    ```
+  - ```python
+    def domain_rank(domain_name: str) -> int:
+        """."""
+    ```
+  - ```python
+    def domain_is_member(domain_to_check: str, domain_base: str) -> bool:
+        """Given two domains, check if the first domain is a member of the second domain.
+    A member means it is either the domain itself, or a subdomain of the domain."""
+    ```
+  - ```python
+    def domain_as_punycode(domain_name: str) -> str:
+        """Convert the given domain name to Punycode (https://en.wikipedia.org/wiki/Punycode)."""
+    ```
+  - ```python
+    def domain_as_unicode(domain_name: str) -> str:
+        """Convert a given domain name to Unicode (https://en.wikipedia.org/wiki/Unicode)."""
+    ```
+  - ```python
+    def tlds() -> List[str]:
+        """Get the top level domains from https://iana.org/."""
+    ```
+  - ```python
+    def is_tld(possible_tld: str) -> bool:
+        """Return whether or not the possible_tld is a valid tld."""
+    ```
 
 ## Development
 
