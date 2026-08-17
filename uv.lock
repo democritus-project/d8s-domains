@@ -547,7 +547,7 @@ wheels = [
 
 [[package]]
 name = "d8s-urls"
-version = "0.6.0"
+version = "0.7.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "d8s-csv" },
@@ -558,11 +558,10 @@ dependencies = [
     { name = "d8s-strings" },
     { name = "hypothesis" },
     { name = "ioc-finder" },
-    { name = "werkzeug" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/52/89/e8addeb075ba5e6b299998c8572fb0e5b8bd43b372a0dd9516cc5bf4b393/d8s_urls-0.6.0.tar.gz", hash = "sha256:391064b5443bd0034055e5535e89a63974e50c3141dfd4a8c19c04d4995bbe1c", size = 29608, upload-time = "2021-05-07T10:54:51.342Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/75/e3/d827d4f965cfb0b14e6a91c4748ce25ea909f8e2b8300e9ece298785952c/d8s_urls-0.7.0.tar.gz", hash = "sha256:109deacd5ad6a8ae5dd4a996fc086955b0c69bc2a06aa2f6018590f5b5dbaf61", size = 98158, upload-time = "2026-07-01T12:06:43.982Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/00/d6/7cb2f79e5c180afd6312f2edae66b00bd9f4bb1f928489cb78324e2291a0/d8s_urls-0.6.0-py2.py3-none-any.whl", hash = "sha256:9416567d3e7c1b69e274a950f25c8da789d1b78b25e7e74786d7cff6ff98f941", size = 24566, upload-time = "2021-05-07T10:54:49.01Z" },
+    { url = "https://files.pythonhosted.org/packages/5e/8a/9b401e738d6c1aff0b44fadd65850284f2358084b731321c8f53e31abe9d/d8s_urls-0.7.0-py3-none-any.whl", hash = "sha256:182a745e13c2161085282b74dcb6e51694505f78b9aca35a98e109211f5ffa2d", size = 21852, upload-time = "2026-07-01T12:06:42.801Z" },
 ]
 
 [[package]]
@@ -1440,18 +1439,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/49/b4/51fe890511f0f242d07cb1ebe6a5b6db417262b9d2568b460347c57d95cc/wcwidth-0.8.1.tar.gz", hash = "sha256:faf5b4a5366a72dc49cad48cdf21f52bdf63bdda995178e483ba247ff79089b9", size = 1466072, upload-time = "2026-06-08T05:57:23.146Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/bd/6e/95b0e537de1f4d4301f76f944642c6da50d1511cc7b3d64dc418a66c7509/wcwidth-0.8.1-py3-none-any.whl", hash = "sha256:f453740b1e4a4f3291faa37944c555d71056c4da08d59809b307ef4feba695c8", size = 323092, upload-time = "2026-06-08T05:57:21.413Z" },
-]
-
-[[package]]
-name = "werkzeug"
-version = "3.1.8"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "markupsafe" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/dd/b2/381be8cfdee792dd117872481b6e378f85c957dd7c5bca38897b08f765fd/werkzeug-3.1.8.tar.gz", hash = "sha256:9bad61a4268dac112f1c5cd4630a56ede601b6ed420300677a869083d70a4c44", size = 875852, upload-time = "2026-04-02T18:49:14.268Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/93/8c/2e650f2afeb7ee576912636c23ddb621c91ac6a98e66dc8d29c3c69446e1/werkzeug-3.1.8-py3-none-any.whl", hash = "sha256:63a77fb8892bf28ebc3178683445222aa500e48ebad5ec77b0ad80f8726b1f50", size = 226459, upload-time = "2026-04-02T18:49:12.72Z" },
 ]
 
 [[package]]
